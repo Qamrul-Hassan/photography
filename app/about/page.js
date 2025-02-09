@@ -111,7 +111,7 @@ export default function About() {
               </div>
               <div className="relative group overflow-hidden rounded-lg shadow-lg">
                 <img
-                  src="/images/border.jpg"
+                  src="/images/boat.jpg"
                   alt="Border"
                   className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-300"
                 />
