@@ -34,12 +34,12 @@ export default function Blog() {
   ];
 
   return (
-    <div className="min-h-screen mt-[80px] bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen mt-[80px] bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">Blog</h1>
-          <p className="text-xl text-gray-600">Insights, tips, and stories from my photography journey.</p>
+          <h1 className="text-5xl font-bold text-white mb-4">Blog</h1>
+          <p className="text-xl text-gray-400">Insights, tips, and stories from my photography journey.</p>
         </div>
 
         {/* Blog Grid */}
@@ -49,18 +49,23 @@ export default function Blog() {
             {blogPosts.map((post) => (
               <div
                 key={post.id}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
               >
-                {/* Full-Sized Image */}
-                <div className="relative w-full h-96">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="absolute top-0 left-0 w-full h-full object-cover rounded-t-xl transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
+                {/* Image Section */}
+                
+<div className="relative w-full h-96">
+  <img
+    src={post.image}
+    alt={post.title}
+    className={`absolute top-0 left-0 w-full h-full ${
+      post.id === 2 || post.id === 3 ? "object-contain" : "object-cover"
+    } brightness-100 hover:brightness-110 transition-all duration-300 rounded-t-xl`}
+  />
+</div>
+
+                
                 <div className="p-6">
-                  <div className="flex items-center space-x-4 text-gray-500 mb-4">
+                  <div className="flex items-center space-x-4 text-gray-400 mb-4">
                     <div className="flex items-center">
                       <FaCalendarAlt className="mr-2" />
                       <span>{post.date}</span>
@@ -70,12 +75,12 @@ export default function Blog() {
                       <span>{post.author}</span>
                     </div>
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">{post.title}</h2>
-                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                  <h2 className="text-2xl font-bold text-white mb-2">{post.title}</h2>
+                  <p className="text-gray-300 mb-4">{post.excerpt}</p>
                   <div className="flex items-center space-x-2">
-                    <FaTags className="text-gray-500" />
+                    <FaTags className="text-gray-400" />
                     {post.tags.map((tag, index) => (
-                      <span key={index} className="text-sm bg-gray-100 px-3 py-1 rounded-full">
+                      <span key={index} className="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full">
                         {tag}
                       </span>
                     ))}
@@ -87,12 +92,12 @@ export default function Blog() {
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Recent Posts</h3>
+            <div className="bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+              <h3 className="text-xl font-bold text-white mb-4">Recent Posts</h3>
               <ul className="space-y-4">
                 {blogPosts.map((post) => (
-                  <li key={post.id} className="border-b pb-4">
-                    <a href="#" className="text-gray-700 hover:text-gray-900 transition-colors duration-300">
+                  <li key={post.id} className="border-b border-gray-600 pb-4">
+                    <a href="#" className="text-gray-300 hover:text-gray-100 transition-colors duration-300">
                       {post.title}
                     </a>
                     <p className="text-sm text-gray-500">{post.date}</p>
@@ -100,11 +105,11 @@ export default function Blog() {
                 ))}
               </ul>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Tags</h3>
+            <div className="bg-gray-800 rounded-xl shadow-lg p-6">
+              <h3 className="text-xl font-bold text-white mb-4">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {["Photography", "Landscape", "Portrait", "Street", "Travel", "Nature"].map((tag, index) => (
-                  <span key={index} className="text-sm bg-gray-100 px-3 py-1 rounded-full hover:bg-gray-200 transition-colors duration-300">
+                  <span key={index} className="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-gray-600 transition-colors duration-300">
                     {tag}
                   </span>
                 ))}

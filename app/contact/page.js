@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 const backgroundImages = [
-  "/Images/golden.jpg",
-  "./Images/hill.jpg",
-  "./Images/sea.jpg"
+  "/images/golden.jpg",
+  "/images/hill.jpg",
+  "/images/sea.jpg",
 ];
 
 export default function ContactPage() {
@@ -39,9 +40,17 @@ export default function ContactPage() {
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-black text-white p-6 overflow-hidden">
       {/* Background Image with Fade Transition */}
-      <div className="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000" 
-        style={{ backgroundImage: `url(${backgroundImages[currentBg]})` }}
-      ></div>
+      <div className="absolute inset-0 w-full h-full transition-opacity duration-1000">
+        <Image
+          src={backgroundImages[currentBg]}
+          alt="Background"
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+          priority
+          className="absolute inset-0"
+        />
+      </div>
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       
       {/* Contact Form */}
@@ -61,7 +70,7 @@ export default function ContactPage() {
               value={form.name} 
               onChange={handleChange} 
               required
-              className="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
             />
           </motion.div>
           <motion.div className="mb-4" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
@@ -72,7 +81,7 @@ export default function ContactPage() {
               value={form.email} 
               onChange={handleChange} 
               required
-              className="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
             />
           </motion.div>
           <motion.div className="mb-4" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.6 }}>
@@ -82,7 +91,7 @@ export default function ContactPage() {
               value={form.message} 
               onChange={handleChange} 
               required
-              className="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
             />
           </motion.div>
           <motion.button 
