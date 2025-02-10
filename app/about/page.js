@@ -8,7 +8,7 @@ export default function AboutMePage() {
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: "url('./Images/golden.jpg')" }}
+        style={{ backgroundImage: "url('./images/golden.jpg')" }}
       ></div>
       
       {/* Animated Content Box */}
