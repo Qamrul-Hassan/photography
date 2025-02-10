@@ -9,168 +9,63 @@ const images = [
   "/images/eagle.jpg",
   "/images/fisher.jpg",
   "/images/fishing.jpg",
+  "/images/boat.jpg",
+  "/images/farmer.jpg",
+  "/images/eagle.jpg",
+  "/images/fisher.jpg",
+  "/images/fishing.jpg",
 ];
 
 export default function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 for next, -1 for previous
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
+      setDirection(1); // Auto-slide always moves forward
     }, 5000); // Auto-slide every 5 seconds
     return () => clearInterval(interval);
   }, []);
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  const goToSlide = (index) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center">
-      {/* Left Side Image with Gradient Overlay */}
-      <motion.div
-        className="absolute left-0 top-0 h-full w-1/6 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/side-left.jpg')" }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
-      </motion.div>
-
-      {/* Main Content */}
-      <div className="relative z-10 flex items-center justify-center h-full w-4/6 px-10">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            className="relative z-20 w-full h-4/5 overflow-hidden rounded-3xl shadow-2xl"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 1 }}
-          >
-            <motion.img
-              src={images[currentIndex]}
-              alt="Current slide"
-              className="w-full h-full object-cover rounded-3xl"
-              initial={{ x: "100%" }}
-              animate={{ x: "0%" }}
-              exit={{ x: "-100%" }}
-              transition={{ duration: 1 }}
-            />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Right Side Image with Gradient Overlay */}
-      <motion.div
-        className="absolute right-0 top-0 h-full w-1/6 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/side-right.jpg')" }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-l from-black via-transparent to-transparent"></div>
-      </motion.div>
-
-      {/* Text Overlay */}
-      <motion.div
-        className="absolute bottom-20 left-20 text-white"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      >
-        <span className="bg-blue-500 text-xs px-2 py-1 rounded-full uppercase tracking-widest">
-          PEOPLE
-        </span>
-        <h1 className="text-6xl font-bold mt-4">69 Flavio Burg Suite</h1>
-        <p className="text-xl mt-2 opacity-80">Arthur Rose</p>
-      </motion.div>
-
-      {/* Navigation Arrows */}
-      <motion.div
-        className="absolute left-10 top-1/2 transform -translate-y-1/2 z-30 cursor-pointer"
-        onClick={prevSlide}
-        whileHover={{ scale: 1.2 }}
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-12 w-12 text-white opacity-70 hover:opacity-100 transition-opacity"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+    <div className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-gray-900">
+      {/* Slideshow */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          className="absolute w-full h-full"
+          initial={{ opacity: 0, x: direction === 1 ? "100%" : "-100%" }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: direction === 1 ? "-100%" : "100%" }}
+          transition={{ duration: 1, ease: "easeInOut" }}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
+          <img
+            src={images[currentIndex]}
+            alt="Slide"
+            className="w-full h-full object-cover"
           />
-        </svg>
-      </motion.div>
-      <motion.div
-        className="absolute right-10 top-1/2 transform -translate-y-1/2 z-30 cursor-pointer"
-        onClick={nextSlide}
-        whileHover={{ scale: 1.2 }}
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-12 w-12 text-white opacity-70 hover:opacity-100 transition-opacity"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </motion.div>
+        </motion.div>
+      </AnimatePresence>
 
-      {/* Floating Particles */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {[...Array(30)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-white rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              duration: Math.random() * 2 + 1,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: Math.random() * 2,
-            }}
+      {/* Pagination Dots */}
+      <div className="absolute bottom-5 flex space-x-2 z-50">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentIndex ? "bg-white scale-125" : "bg-gray-500"
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
-
-      {/* Subtle Glow Effect */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{
-          background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%)",
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
-      ></motion.div>
     </div>
   );
 }
