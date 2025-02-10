@@ -1,121 +1,59 @@
-"use client"; // Mark this component as a Client Component
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link'; // Import Link for client-side navigation
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'; // Import icons from React Icons
+import { useState } from "react";
+import Link from "next/link";
+import { FaBars, FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null); // Ref for the menu
-
-  // Toggle menu
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  // Close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    // Add event listener
-    document.addEventListener('mousedown', handleClickOutside);
-
-    // Cleanup
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-800 text-white">
-      <div className="flex justify-between items-center p-4">
-        {/* Logo and Name */}
-        <div className="flex items-center">
-          <img src="/images/1.png" alt="Logo" className="h-10" />
-          <span className="ml-2 text-xl">Qamrul Hassan</span>
-        </div>
-
-        {/* Social Media Icons */}
-        <div className="hidden md:flex space-x-4">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
-            <FaFacebook className="h-6 w-6" />
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
-            <FaTwitter className="h-6 w-6" />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
-            <FaInstagram className="h-6 w-6" />
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
-            <FaLinkedin className="h-6 w-6" />
-          </a>
-        </div>
-
-        {/* Burger Menu */}
-        <div className="cursor-pointer" onClick={toggleMenu}>
-          <div className={`w-6 h-0.5 bg-white my-1 transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></div>
-          <div className={`w-6 h-0.5 bg-white my-1 opacity-100 transition-opacity ${isMenuOpen ? 'opacity-0' : ''}`}></div>
-          <div className={`w-6 h-0.5 bg-white my-1 transition-transform ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
-        </div>
+    <>
+      {/* Top Navigation Bar */}
+      <div className="fixed top-0 left-0 w-full bg-black h-14 flex items-center px-5 z-50">
+        <button
+          onClick={() => setMenuOpen(true)}
+          className="text-white text-3xl"
+        >
+          <FaBars />
+        </button>
       </div>
 
-      {/* Menu Items */}
+      {/* Sidebar Menu */}
       <div
-        ref={menuRef}
-        className={`fixed top-0 right-0 h-full w-64 bg-gray-800 text-white transform transition-transform ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed top-0 left-0 w-64 h-screen bg-white text-black z-50 p-5 shadow-lg transform ${menuOpen ? "translate-x-0" : "-translate-x-full"} transition-transform`}
       >
-        {/* Close Button (Cross Icon) */}
-        <div className="absolute top-4 right-4 cursor-pointer" onClick={toggleMenu}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+        <div className="flex items-center mb-5">
+          {/* Close Menu Button */}
+          <button onClick={() => setMenuOpen(false)} className="text-black  text-3xl mr-3">
+            ←
+          </button>
+          {/* Logo Image in Menu */}
+          <img src="/images/1.png" alt="Logo" className="h-28" />
         </div>
 
-        {/* Menu Links */}
-        <ul className="p-4 mt-10">
-          <li className="my-2">
-            <Link href="/" className="hover:text-gray-400" onClick={toggleMenu}>Home</Link>
-          </li>
-          <li className="my-2">
-            <Link href="/about" className="hover:text-gray-400" onClick={toggleMenu}>About</Link>
-          </li>
-          <li className="my-2">
-            <Link href="/blog" className="hover:text-gray-400" onClick={toggleMenu}>Blog</Link>
-          </li>
-          <li className="my-2">
-            <Link href="/contact" className="hover:text-gray-400" onClick={toggleMenu}>Contact</Link>
-          </li>
-          <li className="my-2">
-            <Link href="/element" className="hover:text-gray-400" onClick={toggleMenu}>Element</Link>
-          </li>
-          <li className="my-2">
-            <Link href="/portfolio" className="hover:text-gray-400" onClick={toggleMenu}>Portfolio</Link>
-          </li>
-          <li className="my-2">
-            <Link href="/services" className="hover:text-gray-400" onClick={toggleMenu}>Services</Link>
-          </li>
-        </ul>
+        {/* Navigation Links */}
+        <nav className="space-y-6 text-xl font-bold text-gray-700">
+          <Link href="/" className="block" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link href="/about" className="block" onClick={() => setMenuOpen(false)}>About</Link>
+          <Link href="/gallery" className="block" onClick={() => setMenuOpen(false)}>Gallery</Link>
+          <Link href="/blog" className="block" onClick={() => setMenuOpen(false)}>Blog</Link>
+          <Link href="/contact" className="block" onClick={() => setMenuOpen(false)}>Contact</Link>
+        </nav>
 
         {/* Copyright Info */}
-        <div className="absolute bottom-4 left-4 text-sm text-gray-400">
-          &copy; 2023 Qamrul Hassan
+        <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 text-gray-500 text-sm">
+          © 2025 Qamrul Hassan
         </div>
       </div>
-    </nav>
+
+      {/* Social Media Icons (Vertical on Navbar) */}
+      <div className="fixed left-5 top-1/2 transform -translate-y-1/2 flex flex-col space-y-4 text-white z-50">
+        <FaFacebookF className="text-xl font-bold cursor-pointer hover:text-gray-400" />
+        <FaTwitter className="text-xl font-bold cursor-pointer hover:text-gray-400" />
+        <FaLinkedinIn className="text-xl font-extrabold cursor-pointer hover:text-gray-400" />
+        <FaInstagram className="text-xl font-extrabold cursor-pointer hover:text-gray-400" />
+      </div>
+    </>
   );
 }
