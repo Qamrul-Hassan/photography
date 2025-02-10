@@ -8,7 +8,7 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/f
 const backgroundImages = [
   "/images/golden.jpg",
   "/images/hill.jpg",
-  "/images/sea.jpg",
+  "/images/morning.jpg",
 ];
 
 export default function ContactPage() {
