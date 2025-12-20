@@ -11,7 +11,7 @@
   "dependencies": {
     "framer-motion": "^12.4.1",
     "jquery": "^3.7.1",
-    "next": "^15.2.1",
+    "next": "15.2.8",
     "owl.carousel": "^2.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
