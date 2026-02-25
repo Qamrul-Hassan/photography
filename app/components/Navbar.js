@@ -30,7 +30,8 @@ export default function Navbar() {
       <button
         ref={openerRef}
         onClick={() => setMenuOpen(true)}
-        className="fixed top-5 left-5 z-50 rounded-full border border-white/20 bg-black/60 p-3 text-white shadow-lg backdrop-blur transition hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200"
+        className="fixed left-5 z-50 rounded-full border border-white/20 bg-black/60 p-3 text-white shadow-lg backdrop-blur transition hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200"
+        style={{ top: 'calc(env(safe-area-inset-top) + 1.25rem)' }}
         aria-label="Open menu"
         aria-expanded={menuOpen}
         aria-controls="primary-navigation"
@@ -68,7 +69,7 @@ export default function Navbar() {
 
       <aside
         ref={asideRef}
-        className={`fixed top-0 left-0 z-50 h-screen w-72 border-r border-amber-200/20 bg-black/90 p-6 text-amber-200 shadow-2xl transition-transform duration-300 ease-out ${
+        className={`fixed top-0 left-0 z-50 h-screen w-3/4 max-w-xs sm:w-72 border-r border-amber-200/20 bg-black/90 p-6 text-amber-200 shadow-2xl transition-transform duration-300 ease-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         aria-hidden={!menuOpen}
