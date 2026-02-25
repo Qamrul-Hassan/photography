@@ -121,7 +121,7 @@ export default function ThreeDCarousel() {
 
       {/* background image removed to avoid duplicate network request; main slide uses Next/Image with priority */}
 
-      <div className="relative mx-auto mt-24 flex h-[40vh] w-[90vw] max-w-[90vw] items-center justify-center perspective-[1500px] sm:h-[50vh] md:mt-28 md:h-[62vh]">
+      <div className="relative mx-auto mt-32 flex h-[40vh] w-[80vw] max-w-[90vw] items-center justify-center perspective-[1500px] sm:mt-24 sm:w-[85vw] sm:h-[50vh] md:mt-28 md:w-[90vw] md:h-[62vh]">
         <AnimatePresence mode="wait">
           {slides.map(
             (slide, i) =>

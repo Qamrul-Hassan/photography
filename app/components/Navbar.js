@@ -31,7 +31,7 @@ export default function Navbar() {
         ref={openerRef}
         onClick={() => setMenuOpen(true)}
         className="fixed left-5 z-50 rounded-full border border-white/20 bg-black/60 p-3 text-white shadow-lg backdrop-blur transition hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200"
-        style={{ top: 'calc(env(safe-area-inset-top) + 1.25rem)' }}
+        style={{ top: 'calc(env(safe-area-inset-top) + 1.5rem)' }}
         aria-label="Open menu"
         aria-expanded={menuOpen}
         aria-controls="primary-navigation"
