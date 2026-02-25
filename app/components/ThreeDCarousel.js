@@ -35,6 +35,19 @@ export default function ThreeDCarousel() {
     setIsClient(true);
   }, []);
 
+  // keyboard navigation for accessibility
+  useEffect(() => {
+    function onKey(e) {
+      if (e.key === "ArrowLeft") {
+        prevSlide();
+      } else if (e.key === "ArrowRight") {
+        nextSlide();
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [index]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setDirection(1);
@@ -106,13 +119,7 @@ export default function ThreeDCarousel() {
         </div>
       </motion.div>
 
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{ backgroundImage: `url(${slides[index].image})` }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.2 }}
-        transition={{ duration: 1.5 }}
-      />
+      {/* background image removed to avoid duplicate network request; main slide uses Next/Image with priority */}
 
       <div className="relative mx-auto mt-24 flex h-[56vh] w-[90vw] max-w-5xl items-center justify-center perspective-[1500px] md:mt-28 md:h-[62vh]">
         <AnimatePresence mode="wait">
