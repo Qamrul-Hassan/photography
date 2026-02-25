@@ -2,21 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/* globals.css */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #050505;
+    --fg: #f5f0e6;
+    --accent: #f7b35a;
+    --accent-strong: #ff7a18;
+    --muted: #b9b1a6;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    color: var(--fg);
+    background-color: var(--bg);
+    background-image: radial-gradient(circle at 10% 10%, rgba(255, 122, 24, 0.12), transparent 45%),
+      radial-gradient(circle at 80% 20%, rgba(247, 179, 90, 0.14), transparent 40%),
+      radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.04), transparent 50%);
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
   }
 }
 
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: #111111;
+  color: #ffffff;
+  border-radius: 9999px;
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@keyframes bounce-left {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-8px);
+  }
+}
+
+.animate-bounce-left {
+  animation: bounce-left 0.6s infinite ease-in-out;
+}

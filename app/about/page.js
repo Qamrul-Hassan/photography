@@ -1,53 +1,87 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
+import { FaInstagram, FaGlobe, FaYoutube } from "react-icons/fa";
 
 export default function AboutMePage() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-black text-white p-6 overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: "url('./images/golden.jpg')" }}
-      ></div>
-      
-      {/* Animated Content Box */}
-      <motion.div
-        className="relative z-10 bg-white bg-opacity-10 backdrop-blur-md p-10 rounded-lg shadow-2xl max-w-4xl text-center"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.img
-          src="./images/profile.jpg"
-          alt="Photographer"
-          className="w-56 h-56 rounded-full mx-auto border-4 border-white mb-6 shadow-lg"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1 }}
+    <main id="content" className="relative min-h-screen overflow-hidden px-6 py-16 text-white">
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/images/golden.jpg"
+          alt="Golden landscape background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
-        <h1 className="text-4xl font-extrabold mb-4">Hey, I&apos;m Qamrul Hassan</h1>
-        <motion.p
-          className="text-lg text-gray-200 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2 }}
+        <div className="absolute inset-0 bg-black/70" />
+      </div>
+
+      <section className="mx-auto flex w-full max-w-5xl flex-col items-center gap-10 rounded-3xl border border-amber-200/20 bg-white/5 p-8 text-center shadow-2xl backdrop-blur-md md:flex-row md:text-left">
+        <motion.div
+          className="relative h-56 w-56 shrink-0 overflow-hidden rounded-full border-4 border-amber-200/60 shadow-[0_20px_60px_-25px_rgba(255,122,24,0.8)]"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8 }}
         >
-          A visual storyteller, capturing the world one frame at a time. From breathtaking landscapes to intimate portraits,
-          I turn moments into everlasting memories.
-        </motion.p>
-        <div className="mt-6 flex justify-center space-x-4">
-          <motion.a href="#" className="text-xl hover:text-yellow-400 transition-all" whileHover={{ scale: 1.2 }}>
-            📷 Instagram
-          </motion.a>
-          <motion.a href="#" className="text-xl hover:text-blue-400 transition-all" whileHover={{ scale: 1.2 }}>
-            🌍 Website
-          </motion.a>
-          <motion.a href="#" className="text-xl hover:text-red-400 transition-all" whileHover={{ scale: 1.2 }}>
-            🎥 YouTube
-          </motion.a>
+          <Image
+            src="/images/profile.jpg"
+            alt="Portrait of Qamrul Hassan"
+            fill
+            sizes="(max-width: 768px) 60vw, 240px"
+            className="object-cover"
+          />
+        </motion.div>
+
+        <div className="flex flex-1 flex-col gap-6">
+          <motion.header
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+          >
+            <p className="text-xs uppercase tracking-[0.4em] text-amber-200/80">About</p>
+            <h1 className="mt-3 font-display text-3xl font-semibold uppercase tracking-[0.2em] text-white md:text-4xl">
+              Hey, I&apos;m Qamrul Hassan
+            </h1>
+          </motion.header>
+
+          <motion.p
+            className="text-base leading-relaxed text-slate-200 md:text-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.1 }}
+          >
+            A visual storyteller capturing the world one frame at a time. From sweeping landscapes to intimate portraits,
+            I craft images that feel cinematic, bold, and timeless.
+          </motion.p>
+
+          <div className="flex flex-wrap justify-center gap-4 md:justify-start">
+            <a
+              href="https://instagram.com"
+              className="inline-flex items-center gap-2 rounded-full border border-amber-200/40 px-4 py-2 text-sm uppercase tracking-[0.2em] text-amber-100 transition hover:border-amber-200 hover:text-white"
+            >
+              <FaInstagram className="text-lg" />
+              Instagram
+            </a>
+            <a
+              href="https://example.com"
+              className="inline-flex items-center gap-2 rounded-full border border-amber-200/40 px-4 py-2 text-sm uppercase tracking-[0.2em] text-amber-100 transition hover:border-amber-200 hover:text-white"
+            >
+              <FaGlobe className="text-lg" />
+              Website
+            </a>
+            <a
+              href="https://youtube.com"
+              className="inline-flex items-center gap-2 rounded-full border border-amber-200/40 px-4 py-2 text-sm uppercase tracking-[0.2em] text-amber-100 transition hover:border-amber-200 hover:text-white"
+            >
+              <FaYoutube className="text-lg" />
+              YouTube
+            </a>
+          </div>
         </div>
-      </motion.div>
-    </div>
+      </section>
+    </main>
   );
 }

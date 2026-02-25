@@ -22,25 +22,25 @@ const images = [
 
 export default function GalleryPage() {
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
-  const [direction, setDirection] = useState(1); // 1 for next, -1 for previous
+  const [direction, setDirection] = useState(1);
 
   const openLightbox = (index) => {
     setSelectedImageIndex(index);
-    document.body.style.overflow = "hidden"; // Disable scrolling when lightbox is open
+    document.body.style.overflow = "hidden";
   };
 
   const closeLightbox = () => {
     setSelectedImageIndex(null);
-    document.body.style.overflow = "auto"; // Re-enable scrolling
+    document.body.style.overflow = "auto";
   };
 
   const showNextImage = () => {
-    setDirection(1); // Set direction to next
+    setDirection(1);
     setSelectedImageIndex((prev) => (prev + 1) % images.length);
   };
 
   const showPrevImage = () => {
-    setDirection(-1); // Set direction to previous
+    setDirection(-1);
     setSelectedImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
@@ -58,102 +58,115 @@ export default function GalleryPage() {
   }, [selectedImageIndex]);
 
   return (
-    <div className="min-h-screen bg-gray-900 py-10 px-5">
-      <h1 className="text-4xl font-bold text-center text-white mb-10">
-        Photography Gallery
-      </h1>
+    <main id="content" className="min-h-screen px-6 py-16 text-white">
+      <section className="mx-auto w-full max-w-6xl">
+        <header className="mb-12 text-center">
+          <p className="text-xs uppercase tracking-[0.4em] text-amber-200/70">Gallery</p>
+          <h1 className="mt-4 font-display text-4xl font-semibold uppercase tracking-[0.2em] md:text-5xl">
+            Featured Frames
+          </h1>
+          <p className="mt-4 text-base text-slate-200 md:text-lg">
+            A curated collection of landscapes, portraits, and quiet moments.
+          </p>
+        </header>
 
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
-        {images.map((image, index) => (
-          <motion.div
-            key={index}
-            className="mb-4 break-inside-avoid relative group cursor-pointer"
-            whileHover={{ scale: 1.05 }}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
-            onClick={() => openLightbox(index)}
-          >
-            <div className="overflow-hidden rounded-lg">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width={500}
-                height={300}
-                className="w-full h-auto rounded-lg"
-              />
-            </div>
-            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 rounded-lg transition-all duration-300 flex items-center justify-center">
-              <p className="text-white opacity-0 group-hover:opacity-100 text-lg font-bold transition-all duration-300">
-                {image.alt}
-              </p>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+        <div className="columns-1 gap-4 sm:columns-2 md:columns-3 lg:columns-4">
+          {images.map((image, index) => (
+            <motion.figure
+              key={image.src}
+              className="group mb-4 break-inside-avoid rounded-2xl border border-white/10 bg-white/5 shadow-[0_24px_40px_-30px_rgba(0,0,0,0.8)]"
+              whileHover={{ scale: 1.03 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.08 }}
+            >
+              <button
+                type="button"
+                onClick={() => openLightbox(index)}
+                className="relative block w-full overflow-hidden rounded-2xl"
+                aria-label={`Open ${image.alt} photo`}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={500}
+                  height={600}
+                  className="h-auto w-full object-cover transition duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
+                <figcaption className="absolute bottom-4 left-4 text-sm uppercase tracking-[0.3em] text-white/80 opacity-0 transition duration-300 group-hover:opacity-100">
+                  {image.alt}
+                </figcaption>
+              </button>
+            </motion.figure>
+          ))}
+        </div>
+      </section>
 
       <AnimatePresence>
         {selectedImageIndex !== null && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeLightbox}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Image preview"
           >
             <motion.div
-              className="relative w-full h-full flex items-center justify-center p-4"
-              initial={{ scale: 0.5, opacity: 0 }}
+              className="relative flex h-full w-full items-center justify-center"
+              initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.5, opacity: 0 }}
-              transition={{ duration: 0.9, ease: "easeInOut" }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Fixed image display */}
               <motion.div
-                className="relative w-[90vw] h-[90vh]"
-                key={selectedImageIndex} // Ensure the image changes with a unique key
+                className="relative h-[85vh] w-[90vw]"
+                key={selectedImageIndex}
                 initial={{ x: direction === 1 ? "100%" : "-100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: direction === 1 ? "-100%" : "100%" }}
-                transition={{ type: "spring", stiffness: 500, damping: 200 }}
+                transition={{ type: "spring", stiffness: 400, damping: 60 }}
               >
                 <Image
                   src={images[selectedImageIndex].src}
                   alt={images[selectedImageIndex].alt}
-                  fill={true}
-                  objectFit="contain"
-                  className="rounded-lg shadow-xl"
+                  fill
+                  sizes="90vw"
+                  className="rounded-2xl object-contain"
                 />
               </motion.div>
 
               <button
                 onClick={closeLightbox}
-                className="absolute top-4 right-4 text-white text-3xl focus:outline-none hover:text-gray-400 transition"
+                className="absolute right-6 top-6 rounded-full border border-white/30 bg-black/40 px-4 py-2 text-sm uppercase tracking-[0.3em] text-white transition hover:border-white"
                 aria-label="Close lightbox"
               >
-                &times;
+                Close
               </button>
 
               <button
                 onClick={showPrevImage}
-                className="absolute left-6 text-white bg-white bg-opacity-20 backdrop-blur-lg p-4 rounded-full text-3xl shadow-lg hover:bg-opacity-40 transition-all duration-300 hover:scale-110"
+                className="absolute left-6 rounded-full border border-white/20 bg-black/40 px-4 py-3 text-xl text-white transition hover:border-white"
                 aria-label="Previous image"
               >
-                &#10094;
+                &#8249;
               </button>
 
               <button
                 onClick={showNextImage}
-                className="absolute right-6 text-white bg-white bg-opacity-20 backdrop-blur-lg p-4 rounded-full text-3xl shadow-lg hover:bg-opacity-40 transition-all duration-300 hover:scale-110"
+                className="absolute right-6 rounded-full border border-white/20 bg-black/40 px-4 py-3 text-xl text-white transition hover:border-white"
                 aria-label="Next image"
               >
-                &#10095;
+                &#8250;
               </button>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </main>
   );
 }

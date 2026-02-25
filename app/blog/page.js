@@ -1,181 +1,154 @@
 "use client";
 
-import { FaCalendarAlt, FaTags, FaUser } from "react-icons/fa";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { FaCalendarAlt, FaTags, FaUser } from "react-icons/fa";
+
+const blogPosts = [
+  {
+    id: 1,
+    title: "The Art of Landscape Photography",
+    excerpt: "Discover the secrets to capturing stunning landscapes with tips on composition, lighting, and gear.",
+    date: "October 10, 2023",
+    author: "Qamrul Hassan",
+    tags: ["Photography", "Landscape"],
+    image: "/images/landscape.jpg",
+  },
+  {
+    id: 2,
+    title: "Mastering Portrait Photography",
+    excerpt: "Learn how to take captivating portraits with techniques for posing, lighting, and post-processing.",
+    date: "October 5, 2023",
+    author: "Qamrul Hassan",
+    tags: ["Photography", "Portrait"],
+    image: "/images/old.jpg",
+  },
+  {
+    id: 3,
+    title: "Street Photography: Capturing Life",
+    excerpt: "Explore the world of street photography and how to tell compelling stories through your lens.",
+    date: "September 28, 2023",
+    author: "Qamrul Hassan",
+    tags: ["Photography", "Street"],
+    image: "/images/life.jpg",
+  },
+];
 
 export default function Blog() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate a loading state
-    setTimeout(() => setLoading(false), 1500);
-  }, []);
-
-  const blogPosts = [
-    {
-      id: 1,
-      title: "The Art of Landscape Photography",
-      excerpt: "Discover the secrets to capturing stunning landscapes with tips on composition, lighting, and gear.",
-      date: "October 10, 2023",
-      author: "Qamrul Hassan",
-      tags: ["Photography", "Landscape"],
-      image: "/images/landscape.jpg",
-    },
-    {
-      id: 2,
-      title: "Mastering Portrait Photography",
-      excerpt: "Learn how to take captivating portraits with techniques for posing, lighting, and post-processing.",
-      date: "October 5, 2023",
-      author: "Qamrul Hassan",
-      tags: ["Photography", "Portrait"],
-      image: "/images/old.jpg",
-    },
-    {
-      id: 3,
-      title: "Street Photography: Capturing Life",
-      excerpt: "Explore the world of street photography and how to tell compelling stories through your lens.",
-      date: "September 28, 2023",
-      author: "Qamrul Hassan",
-      tags: ["Photography", "Street"],
-      image: "/images/life.jpg",
-    },
-  ];
-
   return (
-    <div className="relative min-h-screen bg-black text-white p-6 overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: "url('./images/blog-bg.jpg')" }}
-      ></div>
+    <main id="content" className="relative min-h-screen overflow-hidden px-6 py-16 text-white">
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/images/blog-bg.jpg"
+          alt="Moody studio background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/75" />
+      </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Page Header */}
-        <motion.div
-          className="text-center mb-12"
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-12">
+        <motion.header
+          className="text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.9 }}
         >
-          <h1 className="text-5xl font-extrabold text-white mb-4">Blog</h1>
-          <p className="text-xl text-gray-400">Insights, tips, and stories from my photography journey.</p>
-        </motion.div>
+          <p className="text-xs uppercase tracking-[0.4em] text-amber-200/70">Journal</p>
+          <h1 className="mt-4 font-display text-4xl font-semibold uppercase tracking-[0.2em] md:text-5xl">
+            Behind The Lens
+          </h1>
+          <p className="mt-4 text-lg text-slate-200">
+            Insights, tips, and stories from a photography journey in motion.
+          </p>
+        </motion.header>
 
-        {/* Blog Grid */}
-        <motion.div
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.3 } },
-          }}
-        >
-          {/* Blog Posts */}
-          <div className="lg:col-span-2 space-y-8">
+        <div className="grid gap-10 lg:grid-cols-[2fr_1fr]">
+          <section className="space-y-8">
             {blogPosts.map((post, index) => (
-              <motion.div
+              <motion.article
                 key={post.id}
-                className="bg-white bg-opacity-10 backdrop-blur-md rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                variants={{
-                  hidden: { opacity: 0, y: 50 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-                }}
-                whileHover={{ scale: 1.02 }}
+                className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-[0_40px_80px_-50px_rgba(0,0,0,0.8)] backdrop-blur"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.15 }}
               >
-                {/* Image Section with Shimmer Effect */}
-                <motion.div
-                  className="relative w-full h-96 overflow-hidden"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1, delay: index * 0.2 }}
-                >
-                  {loading ? (
-                    <div className="w-full h-full bg-gray-700 animate-pulse"></div>
-                  ) : (
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      width={500}
-                      height={300}
-                      className="w-full h-full object-cover rounded-t-xl"
-                      priority
-                    />
-                  )}
-                </motion.div>
+                <div className="relative h-64 w-full">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                </div>
 
-                {/* Content Section */}
-                <motion.div
-                  className="p-6"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                >
-                  <div className="flex items-center space-x-4 text-gray-400 mb-4">
-                    <div className="flex items-center">
-                      <FaCalendarAlt className="mr-2" />
-                      <span>{post.date}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <FaUser className="mr-2" />
-                      <span>{post.author}</span>
-                    </div>
+                <div className="space-y-4 p-6">
+                  <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.2em] text-amber-100/80">
+                    <span className="inline-flex items-center gap-2">
+                      <FaCalendarAlt />
+                      {post.date}
+                    </span>
+                    <span className="inline-flex items-center gap-2">
+                      <FaUser />
+                      {post.author}
+                    </span>
                   </div>
-                  <h2 className="text-2xl font-bold text-white mb-2">{post.title}</h2>
-                  <p className="text-gray-300 mb-4">{post.excerpt}</p>
-                  <div className="flex items-center space-x-2">
-                    <FaTags className="text-gray-400" />
-                    {post.tags.map((tag, index) => (
-                      <span key={index} className="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full">
+
+                  <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">{post.title}</h2>
+                  <p className="text-sm leading-relaxed text-slate-200 md:text-base">{post.excerpt}</p>
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    <FaTags className="text-amber-200/80" />
+                    {post.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-amber-200/30 px-3 py-1 text-xs uppercase tracking-[0.2em] text-amber-100/80"
+                      >
                         {tag}
                       </span>
                     ))}
                   </div>
-                </motion.div>
-              </motion.div>
+                </div>
+              </motion.article>
             ))}
-          </div>
+          </section>
 
-          {/* Sidebar */}
-          <motion.div
-            className="lg:col-span-1"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <motion.div className="bg-white bg-opacity-10 backdrop-blur-md rounded-xl shadow-lg p-6 mb-8">
-              <h3 className="text-xl font-bold text-white mb-4">Recent Posts</h3>
-              <ul className="space-y-4">
+          <aside className="space-y-8">
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+              <h3 className="font-display text-lg uppercase tracking-[0.2em] text-amber-100">Recent Posts</h3>
+              <ul className="mt-6 space-y-4">
                 {blogPosts.map((post) => (
-                  <li key={post.id} className="border-b border-gray-600 pb-4">
-                    <a href="#" className="text-gray-300 hover:text-gray-100 transition-colors duration-300">
+                  <li key={post.id} className="border-b border-white/10 pb-4 last:border-b-0 last:pb-0">
+                    <Link href="#" className="text-sm font-semibold text-white transition hover:text-amber-200">
                       {post.title}
-                    </a>
-                    <p className="text-sm text-gray-500">{post.date}</p>
+                    </Link>
+                    <p className="mt-1 text-xs text-slate-400">{post.date}</p>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
-            <motion.div className="bg-white bg-opacity-10 backdrop-blur-md rounded-xl shadow-lg p-6">
-              <h3 className="text-xl font-bold text-white mb-4">Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {["Photography", "Landscape", "Portrait", "Street", "Travel", "Nature"].map((tag, index) => (
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+              <h3 className="font-display text-lg uppercase tracking-[0.2em] text-amber-100">Tags</h3>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {["Photography", "Landscape", "Portrait", "Street", "Travel", "Nature"].map((tag) => (
                   <span
-                    key={index}
-                    className="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-gray-600 transition-colors duration-300"
+                    key={tag}
+                    className="rounded-full border border-white/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-slate-200"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            </div>
+          </aside>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -5,7 +5,17 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}", // Path to all components
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)"],
+        display: ["var(--font-display)"],
+      },
+      colors: {
+        ink: "#050505",
+        ember: "#ff7a18",
+        emberSoft: "#f7b35a",
+      },
+    },
   },
   plugins: [],
 };

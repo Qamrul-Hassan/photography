@@ -2,7 +2,7 @@ import ThreeDCarousel from "./components/ThreeDCarousel";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gray-900">
+    <main id="content" className="min-h-screen">
       <ThreeDCarousel />
     </main>
   );

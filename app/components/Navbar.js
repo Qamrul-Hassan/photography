@@ -3,91 +3,123 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaBars, FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import {
+  FaBars,
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn,
+  FaInstagram,
+} from "react-icons/fa";
+
+const socialLinks = [
+  { href: "https://www.facebook.com/qamrul.h.shajal", label: "Facebook", icon: FaFacebookF },
+  { href: "https://x.com/Shajal1", label: "X (Twitter)", icon: FaTwitter },
+  { href: "https://www.linkedin.com/in/md-qamrul-hassan-303853347", label: "LinkedIn", icon: FaLinkedinIn },
+  { href: "https://instagram.com", label: "Instagram", icon: FaInstagram },
+];
+
+const navItems = ["Home", "About", "Gallery", "Blog", "Contact"];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
-      {/* Sidebar Toggle Button (Left Side) */}
       <button
         onClick={() => setMenuOpen(true)}
-        className="fixed top-5 left-5 text-white text-2xl focus:outline-none z-50 hover:text-gray-400 transition"
+        className="fixed top-5 left-5 z-50 rounded-full border border-white/20 bg-black/60 p-3 text-white shadow-lg backdrop-blur transition hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200"
         aria-label="Open menu"
+        aria-expanded={menuOpen}
+        aria-controls="primary-navigation"
       >
         <FaBars />
       </button>
 
-      {/* Social Media Icons (Vertically on Left-Side) */}
       {!menuOpen && (
-        <div className="fixed left-5 top-1/2 transform -translate-y-1/2 flex flex-col space-y-4 text-white z-50">
-          {[
-            { href: "https://www.facebook.com/qamrul.h.shajal", icon: <FaFacebookF /> },
-            { href: "https://x.com/Shajal1", icon: <FaTwitter /> },
-            { href: "https://www.linkedin.com/in/md-qamrul-hassan-303853347", icon: <FaLinkedinIn /> },
-            { href: "https://instagram.com", icon: <FaInstagram /> },
-          ].map(({ href, icon }, index) => (
-            <a 
-              key={index} 
-              href={href} 
-              aria-label={`Follow on ${href}`} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-xl cursor-pointer hover:text-gray-400 transition"
+        <nav
+          className="fixed left-5 top-1/2 z-40 flex -translate-y-1/2 flex-col gap-4 text-white"
+          aria-label="Social links"
+        >
+          {socialLinks.map(({ href, label, icon: Icon }) => (
+            <a
+              key={href}
+              href={href}
+              aria-label={label}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xl transition hover:text-amber-200"
             >
-              {icon}
+              <Icon />
             </a>
           ))}
-        </div>
+        </nav>
       )}
 
-      {/* Sidebar Menu */}
+      {menuOpen && (
+        <button
+          className="fixed inset-0 z-40 cursor-default bg-black/60"
+          onClick={() => setMenuOpen(false)}
+          aria-label="Close menu overlay"
+        />
+      )}
+
       <aside
-        className={`fixed top-0 left-0 w-64 h-screen bg-black text-amber-400 z-50 p-6 shadow-xl transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 z-50 h-screen w-72 border-r border-amber-200/20 bg-black/90 p-6 text-amber-200 shadow-2xl transition-transform duration-300 ease-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        aria-hidden={!menuOpen}
       >
-        {/* Top Section: Arrow & Logo (Parallel) */}
-        <div className="flex items-center justify-between mb-8">
-          {/* Close Button with Animation */}
+        <div className="mb-10 flex items-center justify-between">
           <button
             onClick={() => setMenuOpen(false)}
-            className="text-4xl font-extrabold hover:text-gray-500 transition animate-bounce-left"
+            className="animate-bounce-left text-4xl font-extrabold text-amber-100 transition hover:text-amber-300"
             aria-label="Close menu"
           >
             &larr;
           </button>
-
-          <Image src="/images/logo.png" alt="Logo" width={96} height={96} className="h-24" />
-          
+          <Image
+            src="/images/logo.png"
+            alt="Qamrul Hassan logo"
+            width={96}
+            height={96}
+            priority
+            className="h-16 w-16 rounded-full border border-amber-200/30 object-cover"
+          />
         </div>
 
-        {/* Navigation Links */}
-        <nav className="space-y-6 text-xl font-semibold text-amber-300">
-          {["Home", "About", "Gallery", "Blog", "Contact"].map((item) => (
-            <Link 
-              key={item} 
-              href={item === "Home" ? "/" : `/${item.toLowerCase()}`} 
-              className="block hover:text-gray-500 transition" 
+        <nav id="primary-navigation" className="space-y-5 text-lg font-semibold">
+          {navItems.map((item) => (
+            <Link
+              key={item}
+              href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+              className="block rounded-full border border-transparent px-3 py-2 transition hover:border-amber-200/40 hover:text-white"
               onClick={() => setMenuOpen(false)}
             >
               {item}
             </Link>
           ))}
         </nav>
-      </aside>
 
-      {/* Tailwind Keyframes for Bouncing Animation */}
-      <style jsx>{`
-        @keyframes bounce-left {
-          0%, 100% { transform: translateX(0); }
-          50% { transform: translateX(-8px); }
-        }
-        .animate-bounce-left {
-          animation: bounce-left 0.6s infinite ease-in-out;
-        }
-      `}</style>
+        <div className="mt-10 border-t border-amber-200/20 pt-6">
+          <p className="text-xs uppercase tracking-[0.3em] text-amber-200/60">
+            Follow the work
+          </p>
+          <div className="mt-4 flex gap-4">
+            {socialLinks.map(({ href, label, icon: Icon }) => (
+              <a
+                key={`${href}-drawer`}
+                href={href}
+                aria-label={label}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-lg text-amber-100 transition hover:text-white"
+              >
+                <Icon />
+              </a>
+            ))}
+          </div>
+        </div>
+      </aside>
     </>
   );
 }

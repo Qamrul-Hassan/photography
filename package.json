@@ -10,21 +10,18 @@
   },
   "dependencies": {
     "framer-motion": "^12.4.1",
-    "jquery": "^3.7.1",
-    "next": "15.2.8",
-    "owl.carousel": "^2.3.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-icons": "^5.4.0",
-    "react-owl-carousel": "^2.3.3",
-    "swiper": "^11.2.2"
+    "next": "^16.1.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-icons": "^5.4.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "22.13.1",
-    "@types/react": "19.0.8",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
     "eslint": "^9",
-    "eslint-config-next": "15.1.6",
+    "eslint-config-next": "16.1.6",
     "postcss": "^8",
     "tailwindcss": "^3.4.1"
   }
