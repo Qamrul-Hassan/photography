@@ -41,7 +41,7 @@ export default function Navbar() {
 
       {!menuOpen && (
         <nav
-          className="fixed left-5 top-1/2 z-40 flex -translate-y-1/2 flex-col gap-4 text-white"
+          className="fixed left-5 top-1/2 z-40 hidden sm:flex -translate-y-1/2 flex-col gap-4 text-white"
           aria-label="Social links"
         >
           {socialLinks.map(({ href, label, icon: Icon }) => (
