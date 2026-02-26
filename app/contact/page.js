@@ -43,6 +43,7 @@ export default function ContactPage() {
   const [status, setStatus] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentBg, setCurrentBg] = useState(0);
+  const [showCaptcha, setShowCaptcha] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -70,6 +71,7 @@ export default function ContactPage() {
 
       const captchaToken = document.querySelector('textarea[name="g-recaptcha-response"]')?.value || "";
       if (!captchaToken) {
+        setShowCaptcha(true);
         setStatus("Please complete reCAPTCHA.");
         return;
       }
@@ -106,6 +108,7 @@ export default function ContactPage() {
       if (typeof window !== "undefined" && window.grecaptcha) {
         window.grecaptcha.reset();
       }
+      setShowCaptcha(false);
     } catch (error) {
       const msg = error instanceof Error ? error.message : "Email sending failed.";
       setStatus(`Failed to send: ${msg}`);
@@ -116,7 +119,7 @@ export default function ContactPage() {
 
   return (
     <main id="content" className="relative flex min-h-[calc(100dvh-130px)] items-center overflow-x-hidden px-6 pb-2 pt-24 text-white md:pt-28">
-      <Script src="https://www.google.com/recaptcha/api.js" strategy="afterInteractive" />
+      {showCaptcha && <Script src="https://www.google.com/recaptcha/api.js" strategy="afterInteractive" />}
       <AnimatePresence mode="wait">
         <motion.div
           key={backgroundImages[currentBg]}
@@ -182,7 +185,7 @@ export default function ContactPage() {
               required
               className="w-full rounded-xl border border-white/20 bg-black/60 px-4 py-3 text-white caret-amber-300 placeholder:text-slate-300/80 focus:border-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-200/35"
             />
-            {RECAPTCHA_SITE_KEY && (
+            {RECAPTCHA_SITE_KEY && showCaptcha && (
               <div className="overflow-hidden rounded-xl border border-white/20 bg-black/40 p-2">
                 <div className="g-recaptcha" data-sitekey={RECAPTCHA_SITE_KEY} />
               </div>
