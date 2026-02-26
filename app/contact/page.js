@@ -52,6 +52,13 @@ export default function ContactPage() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const nameOk = form.name.trim().length > 0;
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
+    const messageOk = form.message.trim().length > 0;
+    setShowCaptcha(nameOk && emailOk && messageOk);
+  }, [form]);
+
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
