@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -27,11 +27,53 @@ export default function Navbar() {
 
   return (
     <>
+      <div
+        className="pointer-events-none fixed left-1/2 top-5 z-40 hidden -translate-x-1/2 md:block"
+        style={{ top: "calc(env(safe-area-inset-top) + 0.9rem)" }}
+      >
+        <div className="pointer-events-auto flex items-center gap-3 rounded-full border border-amber-200/35 bg-[linear-gradient(130deg,rgba(255,214,160,0.16),rgba(255,214,160,0.03)_40%),rgba(0,0,0,0.55)] px-4 py-2 shadow-[0_26px_70px_-48px_rgba(0,0,0,0.98)] backdrop-blur">
+          <Image
+            src="/images/logo.png"
+            alt="Qamrul Hassan Shajal logo"
+            width={30}
+            height={30}
+            className="rounded-full border border-amber-200/45 object-cover"
+          />
+          <p className="text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-amber-100/92">
+            Qamrul Hassan Shajal
+          </p>
+        </div>
+      </div>
+
+      <div
+        className="fixed right-4 z-40 hidden lg:flex"
+        style={{ top: "calc(env(safe-area-inset-top) + 1.2rem)" }}
+      >
+        <nav className="flex items-center gap-1 rounded-full border border-white/15 bg-black/40 p-1 shadow-[0_24px_60px_-45px_rgba(0,0,0,0.98)] backdrop-blur">
+          {navItems.map((item) => (
+            <Link
+              key={`${item}-top`}
+              href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+              className="rounded-full px-3 py-2 text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-white/90 transition hover:bg-white/10 hover:text-amber-100"
+            >
+              {item}
+            </Link>
+          ))}
+        </nav>
+      </div>
+
+      <div
+        className="pointer-events-none fixed left-6 z-40"
+        style={{ top: "calc(env(safe-area-inset-top) + 1.15rem)" }}
+      >
+        <div className="h-14 w-14 rounded-full bg-[radial-gradient(circle,rgba(255,186,108,0.35),rgba(255,186,108,0.05)_62%,transparent_70%)] blur-sm" />
+      </div>
+
       <button
         ref={openerRef}
         onClick={() => setMenuOpen(true)}
-        className="fixed left-5 z-50 rounded-full border border-white/20 bg-black/60 p-3 text-white shadow-lg backdrop-blur transition hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200"
-        style={{ top: 'calc(env(safe-area-inset-top) + 1.5rem)' }}
+        className="fixed left-6 z-50 grid h-12 w-12 place-items-center rounded-full border border-amber-200/55 bg-[linear-gradient(150deg,rgba(255,214,160,0.16),rgba(255,214,160,0.04)_42%),rgba(0,0,0,0.64)] text-white shadow-[0_26px_70px_-45px_rgba(0,0,0,0.98)] backdrop-blur transition hover:border-amber-200 hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200 xl:left-8"
+        style={{ top: 'calc(env(safe-area-inset-top) + 1.45rem)' }}
         aria-label="Open menu"
         aria-expanded={menuOpen}
         aria-controls="primary-navigation"
@@ -41,9 +83,10 @@ export default function Navbar() {
 
       {!menuOpen && (
         <nav
-          className="fixed left-5 top-1/2 z-40 hidden sm:flex -translate-y-1/2 flex-col gap-4 text-white"
+          className="fixed left-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-4 rounded-[2rem] border border-white/15 bg-[linear-gradient(165deg,rgba(255,214,160,0.12),rgba(255,214,160,0.02)_45%),rgba(0,0,0,0.44)] px-3 py-5 text-white shadow-[0_24px_60px_-45px_rgba(0,0,0,0.95)] backdrop-blur sm:flex xl:left-8"
           aria-label="Social links"
         >
+          <span className="h-8 w-px bg-gradient-to-b from-transparent via-amber-200/60 to-transparent" />
           {socialLinks.map(({ href, label, icon: Icon }) => (
             <a
               key={href}
@@ -51,17 +94,18 @@ export default function Navbar() {
               aria-label={label}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xl transition hover:text-amber-200"
+              className="grid h-9 w-9 place-items-center rounded-full border border-white/12 bg-black/30 text-[1.02rem] text-white/92 transition hover:scale-105 hover:border-amber-200/45 hover:text-amber-200"
             >
               <Icon />
             </a>
           ))}
+          <span className="h-8 w-px bg-gradient-to-b from-transparent via-amber-200/60 to-transparent" />
         </nav>
       )}
 
       {menuOpen && (
         <button
-          className="fixed inset-0 z-40 cursor-default bg-black/60"
+          className="fixed inset-0 z-40 cursor-default bg-black/78 backdrop-blur-[2px]"
           onClick={() => setMenuOpen(false)}
           aria-label="Close menu overlay"
         />
@@ -69,7 +113,7 @@ export default function Navbar() {
 
       <aside
         ref={asideRef}
-        className={`fixed top-0 left-0 z-50 h-screen w-3/4 max-w-xs sm:w-72 border-r border-amber-200/20 bg-black/90 p-6 text-amber-200 shadow-2xl transition-transform duration-300 ease-out ${
+        className={`fixed top-0 left-0 z-50 h-screen w-[86vw] max-w-[360px] border-r border-amber-200/30 bg-[rgba(8,8,8,0.985)] p-6 text-amber-200 shadow-[0_40px_120px_-70px_rgba(0,0,0,1)] backdrop-blur-xl transition-transform duration-300 ease-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         aria-hidden={!menuOpen}
@@ -99,33 +143,39 @@ export default function Navbar() {
           }
         }}
       >
-        <div className="mb-10 flex items-center justify-between">
+        <div className="mb-7 flex items-center justify-between border-b border-white/10 pb-5">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/images/logo.png"
+              alt="Qamrul Hassan Shajal logo"
+              width={56}
+              height={56}
+              priority
+              className="h-11 w-11 rounded-full border border-amber-200/35 object-cover"
+            />
+            <div>
+              <p className="text-[0.56rem] uppercase tracking-[0.24em] text-amber-100/65">Navigation</p>
+              <p className="text-[1.18rem] font-semibold leading-tight text-amber-50">Qamrul Hassan Shajal</p>
+            </div>
+          </div>
           <button
             onClick={() => {
               setMenuOpen(false);
               openerRef.current?.focus();
             }}
-            className="animate-bounce-left text-4xl font-extrabold text-amber-100 transition hover:text-amber-300"
+            className="grid h-10 w-10 place-items-center rounded-full border border-amber-200/35 bg-black/30 text-2xl leading-none text-amber-100 transition hover:border-amber-200 hover:text-white"
             aria-label="Close menu"
           >
-            &larr;
+            &times;
           </button>
-          <Image
-            src="/images/logo.png"
-            alt="Qamrul Hassan logo"
-            width={96}
-            height={96}
-            priority
-            className="h-16 w-16 rounded-full border border-amber-200/30 object-cover"
-          />
         </div>
 
-        <nav id="primary-navigation" className="space-y-5 text-lg font-semibold">
+        <nav id="primary-navigation" className="space-y-3 text-lg font-semibold">
           {navItems.map((item) => (
             <Link
               key={item}
               href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-              className="block rounded-full border border-transparent px-3 py-2 transition hover:border-amber-200/40 hover:text-white"
+              className="block rounded-2xl border border-white/12 bg-[rgba(255,255,255,0.03)] px-5 py-3 text-[1.08rem] leading-none transition hover:border-amber-200/45 hover:bg-[rgba(255,214,160,0.08)] hover:text-white sm:text-[1.12rem]"
               onClick={() => setMenuOpen(false)}
             >
               {item}
@@ -133,11 +183,11 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="mt-10 border-t border-amber-200/20 pt-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-amber-200/60">
+        <div className="mt-10 border-t border-amber-200/20 pt-7">
+          <p className="text-[0.68rem] uppercase tracking-[0.3em] text-amber-200/65">
             Follow the work
           </p>
-          <div className="mt-4 flex gap-4">
+          <div className="mt-5 flex gap-3">
             {socialLinks.map(({ href, label, icon: Icon }) => (
               <a
                 key={`${href}-drawer`}
@@ -145,7 +195,7 @@ export default function Navbar() {
                 aria-label={label}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-lg text-amber-100 transition hover:text-white"
+                className="grid h-12 w-12 place-items-center rounded-full border border-white/20 bg-[rgba(255,255,255,0.04)] text-[1.2rem] text-amber-100 transition hover:border-amber-200/45 hover:bg-[rgba(255,214,160,0.08)] hover:text-white"
               >
                 <Icon />
               </a>

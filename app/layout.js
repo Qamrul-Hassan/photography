@@ -15,33 +15,43 @@ const unbounded = Unbounded({
 });
 
 export const metadata = {
-  title: "Qamrul Hassan | Photography",
+  title: "Qamrul Hassan Shajal | Photography",
   description: "Bold, cinematic photography portfolio and visual storytelling.",
   openGraph: {
-    title: "Qamrul Hassan | Photography",
+    title: "Qamrul Hassan Shajal | Photography",
     description: "Bold, cinematic photography portfolio and visual storytelling.",
-    siteName: "Qamrul Hassan Photography",
+    siteName: "Qamrul Hassan Shajal Photography",
     images: ["/images/og-image.jpg"],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Qamrul Hassan | Photography',
+    title: 'Qamrul Hassan Shajal | Photography',
     description: 'Bold, cinematic photography portfolio and visual storytelling.'
   }
 };
 
 export default function RootLayout({ children }) {
+  const year = new Date().getFullYear();
+
   return (
     <html lang="en" className={`${sora.variable} ${unbounded.variable}`}>
       <head>
         <link rel="preload" as="image" href="/images/boat.jpg" />
       </head>
-      <body className="bg-slate-950 text-slate-100 antialiased">
+      <body className="site-shell bg-slate-950 text-slate-100 antialiased">
         <a className="skip-link" href="#content">
           Skip to content
         </a>
         <Navbar />
-        {children}
+        <div className="site-main">{children}</div>
+        <footer className="site-footer">
+          <div className="site-footer__inner">
+            <p className="site-footer__brand">Qamrul Hassan Shajal</p>
+            <p className="site-footer__copy">
+              Copyright &copy; {year} Qamrul Hassan Shajal. All rights reserved.
+            </p>
+          </div>
+        </footer>
       </body>
     </html>
   );
