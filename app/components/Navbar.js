@@ -67,7 +67,7 @@ export default function Navbar() {
       </div>
 
       <div
-        className="pointer-events-none fixed left-6 z-40 top-[calc(var(--safe-top)+1.15rem)]"
+        className="pointer-events-none fixed left-4 z-40 top-[calc(var(--safe-top)+0.9rem)] sm:left-6 sm:top-[calc(var(--safe-top)+1.15rem)]"
       >
         <div className="h-14 w-14 rounded-full bg-[radial-gradient(circle,rgba(255,186,108,0.35),rgba(255,186,108,0.05)_62%,transparent_70%)] blur-sm" />
       </div>
@@ -75,11 +75,11 @@ export default function Navbar() {
       <button
         ref={openerRef}
         onClick={() => setMenuOpen(true)}
-        className="fixed left-6 z-50 grid h-12 w-12 place-items-center rounded-full border border-amber-200/55 bg-[linear-gradient(150deg,rgba(255,214,160,0.16),rgba(255,214,160,0.04)_42%),rgba(0,0,0,0.64)] text-white shadow-[0_26px_70px_-45px_rgba(0,0,0,0.98)] backdrop-blur transition hover:border-amber-200 hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200 top-[calc(var(--safe-top)+1.45rem)] xl:left-8"
+        className="fixed left-4 z-50 grid h-12 w-12 place-items-center rounded-full border border-amber-200/55 bg-[linear-gradient(150deg,rgba(255,214,160,0.16),rgba(255,214,160,0.04)_42%),rgba(0,0,0,0.64)] text-white leading-none shadow-[0_26px_70px_-45px_rgba(0,0,0,0.98)] backdrop-blur transition hover:border-amber-200 hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200 top-[calc(var(--safe-top)+1.2rem)] sm:left-6 sm:top-[calc(var(--safe-top)+1.45rem)] xl:left-8"
         aria-label="Open menu"
         aria-expanded={menuOpen}
       >
-        <FaBars />
+        <FaBars className="block h-5 w-5" aria-hidden="true" focusable="false" />
       </button>
 
       {!menuOpen && (
