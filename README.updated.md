@@ -5,13 +5,14 @@ Professional, accessible, and international-ready photography portfolio built wi
 This repository contains a modern portfolio website showcasing photography work, client services, and a contact flow with EmailJS and reCAPTCHA integration.
 
 Key goals:
+
 - Fast, SEO-friendly pages using Next.js App Router
 - Lightweight components and responsive design with Tailwind CSS
 - Accessible and international-friendly content structure
 
 ## Demo
 
-- Local: run the app and open http://localhost:3000
+- Local: run the app and open [http://localhost:3000](http://localhost:3000)
 - Production: deploy on Vercel or any platform that supports Next.js
 
 ## Features
@@ -37,15 +38,16 @@ Key goals:
 npm install
 ```
 
-2. Run development server:
+1. Run development server:
 
 ```bash
 npm run dev
 ```
 
-3. Open `http://localhost:3000` in your browser.
+1. Open `http://localhost:3000` in your browser.
 
 Notes:
+
 - Primary source files live in the `app/` directory.
 - Edit the main page at `app/page.js` and component files under `app/components/`.
 
@@ -73,9 +75,9 @@ Do NOT commit secrets. Only public keys intended for client usage should start w
 Contributions are welcome. For code changes:
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/my-change`
-3. Commit your changes: `git commit -m "feat: short description"`
-4. Push and open a pull request
+1. Create a feature branch: `git checkout -b feature/my-change`
+1. Commit your changes: `git commit -m "feat: short description"`
+1. Push and open a pull request
 
 Please include screenshots or a short description of behavior changes when submitting UI updates.
 
