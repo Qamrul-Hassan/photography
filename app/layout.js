@@ -17,6 +17,11 @@ const unbounded = Unbounded({
 export const metadata = {
   title: "Qamrul Hassan Shajal | Photography",
   description: "Bold, cinematic photography portfolio and visual storytelling.",
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
   openGraph: {
     title: "Qamrul Hassan Shajal | Photography",
     description: "Bold, cinematic photography portfolio and visual storytelling.",

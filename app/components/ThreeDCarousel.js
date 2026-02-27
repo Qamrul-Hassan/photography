@@ -104,20 +104,6 @@ export default function ThreeDCarousel() {
             Fine-art photography of wildlife, people, and landscapes, composed with emotion, timing, and perspective.
           </p>
 
-          <div className="mt-8 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-            <div className="hero-epic-chip">
-              <p>Curated Frames</p>
-              <strong>120+</strong>
-            </div>
-            <div className="hero-epic-chip">
-              <p>Photo Essays</p>
-              <strong>08</strong>
-            </div>
-            <div className="hero-epic-chip col-span-2 sm:col-span-1">
-              <p>Field Base</p>
-              <strong>Bangladesh</strong>
-            </div>
-          </div>
         </motion.div>
 
         <div className="relative">
@@ -190,6 +176,23 @@ export default function ThreeDCarousel() {
             </div>
           </div>
 
+        </div>
+      </div>
+
+      <div className="mx-auto w-full max-w-[1520px] px-4 pb-8 sm:px-6 lg:px-10 lg:pl-28 xl:pl-32">
+        <div className="grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+          <div className="hero-epic-chip">
+            <p>Curated Frames</p>
+            <strong>120+</strong>
+          </div>
+          <div className="hero-epic-chip">
+            <p>Photo Essays</p>
+            <strong>08</strong>
+          </div>
+          <div className="hero-epic-chip col-span-2 sm:col-span-1">
+            <p>Field Base</p>
+            <strong>Bangladesh</strong>
+          </div>
         </div>
       </div>
     </section>
