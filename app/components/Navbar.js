@@ -34,8 +34,7 @@ export default function Navbar() {
   return (
     <>
       <div
-        className="pointer-events-none fixed left-1/2 top-5 z-40 hidden -translate-x-1/2 md:block"
-        style={{ top: "calc(env(safe-area-inset-top) + 0.9rem)" }}
+        className="pointer-events-none fixed left-1/2 z-40 hidden -translate-x-1/2 top-[calc(var(--safe-top)+0.9rem)] md:block"
       >
         <div className="pointer-events-auto flex items-center gap-3 rounded-full border border-amber-200/35 bg-[linear-gradient(130deg,rgba(255,214,160,0.16),rgba(255,214,160,0.03)_40%),rgba(0,0,0,0.55)] px-4 py-2 shadow-[0_26px_70px_-48px_rgba(0,0,0,0.98)] backdrop-blur">
           <Image
@@ -52,8 +51,7 @@ export default function Navbar() {
       </div>
 
       <div
-        className="fixed right-4 z-40 hidden lg:flex"
-        style={{ top: "calc(env(safe-area-inset-top) + 1.2rem)" }}
+        className="fixed right-4 z-40 hidden top-[calc(var(--safe-top)+1.2rem)] lg:flex"
       >
         <nav className="flex items-center gap-1 rounded-full border border-white/15 bg-black/40 p-1 shadow-[0_24px_60px_-45px_rgba(0,0,0,0.98)] backdrop-blur">
           {navItems.map((item) => (
@@ -69,8 +67,7 @@ export default function Navbar() {
       </div>
 
       <div
-        className="pointer-events-none fixed left-6 z-40"
-        style={{ top: "calc(env(safe-area-inset-top) + 1.15rem)" }}
+        className="pointer-events-none fixed left-6 z-40 top-[calc(var(--safe-top)+1.15rem)]"
       >
         <div className="h-14 w-14 rounded-full bg-[radial-gradient(circle,rgba(255,186,108,0.35),rgba(255,186,108,0.05)_62%,transparent_70%)] blur-sm" />
       </div>
@@ -78,11 +75,9 @@ export default function Navbar() {
       <button
         ref={openerRef}
         onClick={() => setMenuOpen(true)}
-        className="fixed left-6 z-50 grid h-12 w-12 place-items-center rounded-full border border-amber-200/55 bg-[linear-gradient(150deg,rgba(255,214,160,0.16),rgba(255,214,160,0.04)_42%),rgba(0,0,0,0.64)] text-white shadow-[0_26px_70px_-45px_rgba(0,0,0,0.98)] backdrop-blur transition hover:border-amber-200 hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200 xl:left-8"
-        style={{ top: 'calc(env(safe-area-inset-top) + 1.45rem)' }}
+        className="fixed left-6 z-50 grid h-12 w-12 place-items-center rounded-full border border-amber-200/55 bg-[linear-gradient(150deg,rgba(255,214,160,0.16),rgba(255,214,160,0.04)_42%),rgba(0,0,0,0.64)] text-white shadow-[0_26px_70px_-45px_rgba(0,0,0,0.98)] backdrop-blur transition hover:border-amber-200 hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200 top-[calc(var(--safe-top)+1.45rem)] xl:left-8"
         aria-label="Open menu"
         aria-expanded={menuOpen}
-        aria-controls="primary-navigation"
       >
         <FaBars />
       </button>
