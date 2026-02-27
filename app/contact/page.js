@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Script from "next/script";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
@@ -16,7 +15,6 @@ const EMAILJS_TEMPLATE_OWNER =
 const EMAILJS_TEMPLATE_AUTOREPLY =
   process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_AUTOREPLY_ID ||
   process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_AUTOREPLY;
-const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 async function sendEmailJS(templateId, templateParams) {
   const response = await fetch(EMAILJS_ENDPOINT, {
@@ -43,7 +41,6 @@ export default function ContactPage() {
   const [status, setStatus] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentBg, setCurrentBg] = useState(0);
-  const [showCaptcha, setShowCaptcha] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,13 +48,6 @@ export default function ContactPage() {
     }, 5200);
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    const nameOk = form.name.trim().length > 0;
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
-    const messageOk = form.message.trim().length > 0;
-    setShowCaptcha(nameOk && emailOk && messageOk);
-  }, [form]);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -71,24 +61,12 @@ export default function ContactPage() {
         setStatus("Email service is not configured. Add EmailJS keys in .env.local.");
         return;
       }
-      if (!RECAPTCHA_SITE_KEY) {
-        setStatus("reCAPTCHA site key is missing in .env.local.");
-        return;
-      }
-
-      const captchaToken = document.querySelector('textarea[name="g-recaptcha-response"]')?.value || "";
-      if (!captchaToken) {
-        setShowCaptcha(true);
-        setStatus("Please complete reCAPTCHA.");
-        return;
-      }
 
       const ownerParams = {
         from_name: form.name,
         from_email: form.email,
         message: form.message,
         reply_to: form.email,
-        "g-recaptcha-response": captchaToken,
       };
 
       await sendEmailJS(EMAILJS_TEMPLATE_OWNER, ownerParams);
@@ -105,17 +83,12 @@ export default function ContactPage() {
           from_name: form.name,
           studio_name: "Qamrul Hassan Shajal Photography",
           brand_name: "QHS Team",
-          "g-recaptcha-response": captchaToken,
         };
         await sendEmailJS(EMAILJS_TEMPLATE_AUTOREPLY, autoReplyParams);
       }
 
       setStatus("Message sent successfully.");
       setForm({ name: "", email: "", message: "" });
-      if (typeof window !== "undefined" && window.grecaptcha) {
-        window.grecaptcha.reset();
-      }
-      setShowCaptcha(false);
     } catch (error) {
       const msg = error instanceof Error ? error.message : "Email sending failed.";
       setStatus(`Failed to send: ${msg}`);
@@ -126,7 +99,6 @@ export default function ContactPage() {
 
   return (
     <main id="content" className="relative flex min-h-[calc(100dvh-130px)] items-center overflow-x-hidden px-6 pb-2 pt-24 text-white md:pt-28">
-      {showCaptcha && <Script src="https://www.google.com/recaptcha/api.js" strategy="afterInteractive" />}
       <AnimatePresence mode="wait">
         <motion.div
           key={backgroundImages[currentBg]}
@@ -192,11 +164,6 @@ export default function ContactPage() {
               required
               className="w-full rounded-xl border border-white/20 bg-black/60 px-4 py-3 text-white caret-amber-300 placeholder:text-slate-300/80 focus:border-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-200/35"
             />
-            {RECAPTCHA_SITE_KEY && showCaptcha && (
-              <div className="overflow-hidden rounded-xl border border-white/20 bg-black/40 p-2">
-                <div className="g-recaptcha" data-sitekey={RECAPTCHA_SITE_KEY} />
-              </div>
-            )}
 
             <button type="submit" disabled={isSubmitting} className="w-full rounded-xl bg-amber-400 px-6 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-amber-300 disabled:opacity-70">
               {isSubmitting ? "Sending..." : "Send Message"}
