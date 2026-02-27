@@ -72,14 +72,14 @@ export default function ThreeDCarousel() {
           transition={{ duration: reduceMotion ? 0.15 : 1.1, ease: [0.22, 1, 0.36, 1] }}
           aria-hidden="true"
         >
-          <Image src={current.image} alt="" fill sizes="100vw" className="object-cover" priority={index === 0} />
+          <Image src={current.image} alt="" fill sizes="100vw" className="object-cover" loading="eager" fetchPriority="high" />
         </motion.div>
       </AnimatePresence>
 
       <div className="hero-epic-overlay absolute inset-0 -z-20" aria-hidden="true" />
       <div className="hero-epic-grid absolute inset-0 -z-10" aria-hidden="true" />
 
-      <div className="mx-auto grid w-full max-w-[1520px] gap-8 px-4 pb-14 pt-24 sm:px-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-12 lg:px-10 lg:pl-28 xl:pl-32">
+      <div className="mx-auto grid w-full max-w-[1520px] gap-6 px-4 pb-10 pt-24 sm:gap-8 sm:px-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-12 lg:px-10 lg:pb-14 lg:pl-28 xl:pl-32">
         <motion.div
           initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -104,7 +104,7 @@ export default function ThreeDCarousel() {
             Fine-art photography of wildlife, people, and landscapes, composed with emotion, timing, and perspective.
           </p>
 
-          <div className="mt-9 grid max-w-lg grid-cols-3 gap-4">
+          <div className="mt-8 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
             <div className="hero-epic-chip">
               <p>Curated Frames</p>
               <strong>120+</strong>
@@ -113,7 +113,7 @@ export default function ThreeDCarousel() {
               <p>Photo Essays</p>
               <strong>08</strong>
             </div>
-            <div className="hero-epic-chip">
+            <div className="hero-epic-chip col-span-2 sm:col-span-1">
               <p>Field Base</p>
               <strong>Bangladesh</strong>
             </div>
@@ -137,19 +137,21 @@ export default function ThreeDCarousel() {
                 transition={{ duration: reduceMotion ? 0.15 : 0.65, ease: [0.22, 1, 0.36, 1] }}
                 className="relative overflow-hidden rounded-[1.4rem]"
               >
-                <div className="relative h-[380px] sm:h-[520px] lg:h-[610px]">
+                <div className="relative h-[340px] sm:h-[480px] lg:h-[610px]">
                   <Image
                     src={current.image}
                     alt={`${current.title} by Qamrul Hassan Shajal`}
                     fill
                     sizes="(max-width: 1024px) 95vw, 62vw"
                     className="object-cover"
+                    loading="eager"
+                    fetchPriority="high"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/28 to-transparent" />
 
                   <figcaption className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8">
                     <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-amber-100/90">{current.location}</p>
-                    <h2 className="mt-2 font-display text-3xl leading-none text-white sm:text-5xl">{current.title}</h2>
+                    <h2 className="mt-2 font-display text-2xl leading-none text-white sm:text-4xl lg:text-5xl">{current.title}</h2>
                     <p className="mt-2 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-amber-100/82 sm:text-xs">{current.subtitle}</p>
                   </figcaption>
                 </div>

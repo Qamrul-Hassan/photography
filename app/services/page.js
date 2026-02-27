@@ -35,13 +35,13 @@ export default function ServicesPage() {
   const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
 
   return (
-    <main id="content" className="relative min-h-screen overflow-hidden px-6 py-16 text-white">
+    <main id="content" className="relative min-h-screen overflow-x-hidden px-4 py-14 text-white sm:px-6 sm:py-16">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_10%,rgba(255,180,110,0.18),transparent_38%),linear-gradient(130deg,#070707,#0f0b08_48%,#19120c)]" />
 
       <section className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="rounded-[1.8rem] border border-white/15 bg-[linear-gradient(155deg,rgba(255,214,160,0.1),rgba(255,214,160,0.01)_35%),rgba(0,0,0,0.34)] p-7 backdrop-blur">
           <p className="text-xs uppercase tracking-[0.36em] text-amber-200/75">Services</p>
-          <h1 className="mt-4 bg-gradient-to-b from-white via-[#ffefda] to-[#f0bf7f] bg-clip-text font-display text-4xl text-transparent md:text-5xl">Photography Services</h1>
+          <h1 className="mt-4 bg-gradient-to-b from-white via-[#ffefda] to-[#f0bf7f] bg-clip-text font-display text-[clamp(2rem,8vw,3.3rem)] leading-[1.04] text-transparent">Photography Services</h1>
           <p className="mt-4 text-slate-200 md:text-lg">
             Tailored photography sessions with a premium visual language, from concept to final delivery.
           </p>
@@ -62,7 +62,7 @@ export default function ServicesPage() {
         </div>
 
         <div className="relative overflow-hidden rounded-[1.9rem] border border-white/15 bg-black/35 p-2 shadow-[0_38px_110px_-65px_rgba(255,130,30,0.7)]">
-          <div className="relative h-[66vh] min-h-[420px] overflow-hidden rounded-[1.4rem]">
+          <div className="relative h-[52vh] min-h-[300px] overflow-hidden rounded-[1.4rem] sm:h-[62vh] sm:min-h-[380px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}

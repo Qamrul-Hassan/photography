@@ -58,13 +58,13 @@ export default function GalleryPage() {
   }, [selectedImageIndex]);
 
   return (
-    <main id="content" className="relative min-h-screen overflow-hidden px-6 py-16 text-white">
+    <main id="content" className="relative min-h-screen overflow-x-hidden px-4 py-14 text-white sm:px-6 sm:py-16">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_20%,rgba(255,142,66,0.18),transparent_40%),linear-gradient(130deg,#060606,#120c08_55%,#1d140d)]" />
 
       <section className="mx-auto w-full max-w-7xl">
         <header className="mb-12 text-center">
           <p className="text-xs uppercase tracking-[0.36em] text-amber-200/75">Gallery</p>
-          <h1 className="mt-4 bg-gradient-to-b from-white via-[#ffefda] to-[#f0bf7f] bg-clip-text font-display text-4xl text-transparent md:text-6xl">Curated Visual Archive</h1>
+          <h1 className="mt-4 bg-gradient-to-b from-white via-[#ffefda] to-[#f0bf7f] bg-clip-text font-display text-[clamp(2rem,8vw,3.7rem)] leading-[1.03] text-transparent">Curated Visual Archive</h1>
           <p className="mx-auto mt-4 max-w-2xl text-slate-200 md:text-lg">
             Explore selected works across documentary, landscape, and wildlife collections.
           </p>
@@ -103,7 +103,7 @@ export default function GalleryPage() {
             aria-label="Image preview"
           >
             <motion.div className="relative flex h-full w-full items-center justify-center" onClick={(e) => e.stopPropagation()}>
-              <div className="absolute left-1/2 top-2 z-20 flex w-[96vw] max-w-[1320px] -translate-x-1/2 items-center justify-between rounded-full border border-white/20 bg-black/58 px-4 py-2 backdrop-blur sm:top-4 sm:px-5">
+              <div className="absolute left-1/2 top-2 z-20 flex w-[96vw] max-w-[1320px] -translate-x-1/2 items-center justify-between gap-2 rounded-full border border-white/20 bg-black/58 px-3 py-2 backdrop-blur sm:top-4 sm:px-5">
                 <div>
                   <p className="text-[0.6rem] uppercase tracking-[0.22em] text-amber-100/70">Gallery</p>
                   <p className="text-sm font-semibold text-white sm:text-base">{images[selectedImageIndex].alt}</p>
@@ -112,7 +112,7 @@ export default function GalleryPage() {
                   <p className="hidden text-[0.62rem] uppercase tracking-[0.18em] text-white/65 md:block">
                     Esc Close | ← Prev | → Next
                   </p>
-                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-amber-100/80">
+                  <p className="text-[0.62rem] uppercase tracking-[0.16em] text-amber-100/80 sm:text-[0.68rem] sm:tracking-[0.2em]">
                     {String(selectedImageIndex + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
                   </p>
                   <button

@@ -40,7 +40,7 @@ export default function BlogPage() {
   const rest = blogPosts.slice(1);
 
   return (
-    <main id="content" className="relative min-h-screen overflow-hidden px-6 py-16 text-white">
+    <main id="content" className="relative min-h-screen overflow-x-hidden px-4 py-14 text-white sm:px-6 sm:py-16">
       <div className="absolute inset-0 -z-20">
         <Image src="/images/hill.jpg" alt="Blog background" fill priority sizes="100vw" className="object-cover" />
       </div>
@@ -54,7 +54,7 @@ export default function BlogPage() {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs uppercase tracking-[0.42em] text-amber-200/80">Journal</p>
-          <h1 className="mt-3 bg-gradient-to-b from-white via-[#ffefda] to-[#f0bf7f] bg-clip-text font-display text-4xl text-transparent md:text-6xl">
+          <h1 className="mt-3 bg-gradient-to-b from-white via-[#ffefda] to-[#f0bf7f] bg-clip-text font-display text-[clamp(2rem,8.4vw,3.7rem)] leading-[1.03] text-transparent">
             Stories Behind The Frame
           </h1>
           <p className="mx-auto mt-5 max-w-2xl leading-relaxed text-slate-200 md:text-lg">

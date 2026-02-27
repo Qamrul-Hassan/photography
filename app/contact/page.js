@@ -98,7 +98,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main id="content" className="relative flex min-h-[calc(100dvh-130px)] items-center overflow-x-hidden px-6 pb-2 pt-24 text-white md:pt-28">
+    <main id="content" className="relative flex min-h-[calc(100dvh-130px)] items-center overflow-x-hidden px-4 pb-3 pt-24 text-white sm:px-6 md:pt-28">
       <AnimatePresence mode="wait">
         <motion.div
           key={backgroundImages[currentBg]}
@@ -122,14 +122,14 @@ export default function ContactPage() {
       <div className="fixed inset-0 -z-10 bg-[linear-gradient(115deg,rgba(0,0,0,0.84),rgba(0,0,0,0.52),rgba(0,0,0,0.8))]" aria-hidden="true" />
 
       <motion.section
-        className="mx-auto my-auto grid w-full max-w-6xl items-center gap-4 rounded-[2rem] border border-white/15 bg-[linear-gradient(155deg,rgba(255,214,160,0.1),rgba(255,214,160,0.01)_35%),rgba(0,0,0,0.34)] p-5 backdrop-blur lg:grid-cols-[1fr_0.95fr] lg:p-5"
+        className="mx-auto my-auto grid w-full max-w-6xl items-center gap-4 rounded-[2rem] border border-white/15 bg-[linear-gradient(155deg,rgba(255,214,160,0.1),rgba(255,214,160,0.01)_35%),rgba(0,0,0,0.34)] p-4 backdrop-blur sm:p-5 lg:grid-cols-[1fr_0.95fr] lg:p-5"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         <div>
           <p className="text-xs uppercase tracking-[0.36em] text-amber-200/75">Contact</p>
-          <h1 className="mt-3 bg-gradient-to-b from-white via-[#ffefda] to-[#f0bf7f] bg-clip-text font-display text-[2.3rem] leading-[0.95] text-transparent md:text-[2.55rem]">Let&apos;s Create Something Exceptional</h1>
+          <h1 className="mt-3 bg-gradient-to-b from-white via-[#ffefda] to-[#f0bf7f] bg-clip-text font-display text-[clamp(2rem,10vw,2.7rem)] leading-[0.95] text-transparent">Let&apos;s Create Something Exceptional</h1>
           <p className="mt-2 max-w-xl text-slate-200 md:text-[0.98rem]">
             Share your vision and I&apos;ll get back with availability, creative direction, and project details.
           </p>
@@ -181,7 +181,7 @@ export default function ContactPage() {
         </div>
 
         <motion.div className="relative overflow-hidden rounded-2xl border border-white/15" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }}>
-          <div className="relative h-[320px] lg:h-[500px]">
+          <div className="relative h-[360px] lg:h-[500px]">
             <Image src="/images/profile.jpg" alt="Photographer portrait" fill sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover object-top" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
           </div>

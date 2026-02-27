@@ -35,9 +35,6 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en" className={`${sora.variable} ${unbounded.variable}`}>
-      <head>
-        <link rel="preload" as="image" href="/images/boat.jpg" />
-      </head>
       <body className="site-shell bg-slate-950 text-slate-100 antialiased">
         <a className="skip-link" href="#content">
           Skip to content

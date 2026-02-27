@@ -6,6 +6,7 @@
 html, body {
   overflow-x: hidden;
   min-height: 100%;
+  width: 100%;
   padding-top: env(safe-area-inset-top);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
@@ -301,8 +302,9 @@ textarea:-webkit-autofill:focus {
   display: block;
   margin-top: 0.2rem;
   color: #ffffff;
-  font-size: 1.35rem;
+  font-size: clamp(1.08rem, 4.9vw, 1.35rem);
   line-height: 1.1;
+  overflow-wrap: anywhere;
 }
 
 .hero-quote-glow {
@@ -330,6 +332,21 @@ textarea:-webkit-autofill:focus {
   border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
+}
+
+@media (max-width: 640px) {
+  .hero-epic-chip {
+    padding: 0.62rem;
+  }
+
+  .hero-epic-chip p {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+  }
+
+  .hero-copy-panel {
+    padding: 0.82rem;
+  }
 }
 
 .hero-stage {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -24,6 +24,12 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const openerRef = useRef(null);
   const asideRef = useRef(null);
+
+  useEffect(() => {
+    if (!menuOpen && asideRef.current?.contains(document.activeElement)) {
+      openerRef.current?.focus();
+    }
+  }, [menuOpen]);
 
   return (
     <>
@@ -111,17 +117,14 @@ export default function Navbar() {
         />
       )}
 
+      {menuOpen && (
       <aside
         ref={asideRef}
-        className={`fixed top-0 left-0 z-50 h-screen w-[86vw] max-w-[360px] border-r border-amber-200/30 bg-[rgba(8,8,8,0.985)] p-6 text-amber-200 shadow-[0_40px_120px_-70px_rgba(0,0,0,1)] backdrop-blur-xl transition-transform duration-300 ease-out ${
-          menuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-        aria-hidden={!menuOpen}
+        className="fixed top-0 left-0 z-50 h-screen w-[86vw] max-w-[360px] border-r border-amber-200/30 bg-[rgba(8,8,8,0.985)] p-6 text-amber-200 shadow-[0_40px_120px_-70px_rgba(0,0,0,1)] backdrop-blur-xl transition-transform duration-300 ease-out translate-x-0"
         role="dialog"
-        aria-modal={menuOpen}
+        aria-modal="true"
         tabIndex={-1}
         onKeyDown={(e) => {
-          if (!menuOpen) return;
           if (e.key === "Escape") {
             setMenuOpen(false);
             openerRef.current?.focus();
@@ -203,6 +206,7 @@ export default function Navbar() {
           </div>
         </div>
       </aside>
+      )}
     </>
   );
 }
