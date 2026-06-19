@@ -49,9 +49,14 @@ export default function RootLayout({ children }) {
         <footer className="site-footer">
           <div className="site-footer__inner">
             <p className="site-footer__brand">Qamrul Hassan Shajal</p>
-            <p className="site-footer__copy">
-              Copyright &copy; {year} Qamrul Hassan Shajal. All rights reserved.
-            </p>
+            <div className="site-footer__meta flex flex-col gap-2 sm:flex-row sm:justify-between w-full">
+              <p className="site-footer__copy">
+                Copyright &copy; {year} Qamrul Hassan Shajal. All rights reserved.
+              </p>
+              <p className="site-footer__copy">
+                Explore tools on <a href="https://costnest.site" target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-300 transition-colors">CostNest</a>
+              </p>
+            </div>
           </div>
         </footer>
       </body>
